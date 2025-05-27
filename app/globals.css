@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 222 47% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 222 47% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 160 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 160 100% 50%;
+    --radius: 0.75rem;
+    --brand-green: #00ffaa;
+    --head-gray: #1a1f26;
+    --neon-blue: #00ffaa;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer components {
+  .neon-glow {
+    box-shadow: 0 0 10px theme("colors.primary.DEFAULT"), 0 0 20px theme("colors.primary.DEFAULT");
+  }
+
+  .neon-text {
+    text-shadow: 0 0 5px theme("colors.primary.DEFAULT"), 0 0 10px theme("colors.primary.DEFAULT");
+  }
+
+  .neon-border {
+    border: 1px solid theme("colors.primary.DEFAULT");
+    box-shadow: 0 0 5px theme("colors.primary.DEFAULT"), 0 0 10px theme("colors.primary.DEFAULT");
+  }
+}
+
+/* Robot Logo Animation Styles - Optimized for Performance */
+.robot-logo {
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.robot-logo .scan-ring {
+  fill: none;
+  stroke: var(--brand-green);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 10 242;
+  transform-origin: 50% 50%;
+  animation: rotate-ring 8s linear infinite, scan-ring 2s linear infinite;
+  will-change: transform, stroke-dashoffset;
+}
+
+@keyframes rotate-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scan-ring {
+  to {
+    stroke-dashoffset: -252;
+  }
+}
+
+.robot-logo .robot-head {
+  fill: var(--head-gray);
+}
+
+.robot-logo .robot-neck {
+  fill: var(--head-gray);
+}
+
+.robot-logo .robot-antenna {
+  fill: var(--head-gray);
+}
+
+.robot-logo .robot-eye {
+  fill: var(--brand-green);
+  transform-origin: 50% 50%;
+  animation: pulse-eye 2s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+@keyframes pulse-eye {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.2);
+    filter: brightness(1.5);
+  }
+}
+
+/* Optimize animations for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .robot-logo .scan-ring,
+  .robot-logo .robot-eye,
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ffaa;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #00ffaa;
+  outline-offset: 2px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-gray-900\/50 {
+    background-color: rgb(17 24 39 / 0.8);
+  }
+  .border-gray-800 {
+    border-color: rgb(75 85 99);
+  }
+}
+
+/* Print styles */
+@media print {
+  .fixed,
+  .animate-pulse,
+  button {
+    display: none !important;
+  }
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+/* Reduce layout shifts */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* Optimize text rendering */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  line-height: 1.6;
+}
